@@ -10,9 +10,7 @@ from openwpm.task_manager import TaskManager
 # The list of sites that we wish to crawl
 NUM_BROWSERS = 1
 sites = [
-    "http://www.example.com",
-    "http://www.princeton.edu",
-    "http://citp.princeton.edu/",
+    "http://www.google.com",
 ]
 
 # Loads the default ManagerParams
@@ -35,6 +33,8 @@ for browser_param in browser_params:
     browser_param.callstack_instrument = True
     # Record DNS resolution
     browser_param.dns_instrument = True
+
+    browser_param.display_mode="native"
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params.data_directory = Path("./datadir/")
@@ -69,7 +69,7 @@ with TaskManager(
         )
 
         # Start by visiting the page
-        command_sequence.append_command(GetCommand(url=site, sleep=3), timeout=60)
+        command_sequence.append_command(GetCommand(url=site, sleep=60), timeout=60)
         # Have a look at custom_command.py to see how to implement your own command
         command_sequence.append_command(LinkCountingCommand())
 
